@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class MallocBinnedInsight : ModuleRules
+public class MallocBinnedInsights : ModuleRules
 {
-	public MallocBinnedInsight(ReadOnlyTargetRules Target) : base(Target)
+	public MallocBinnedInsights(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		
@@ -38,6 +38,8 @@ public class MallocBinnedInsight : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"TraceInsights",
+				"TraceServices"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

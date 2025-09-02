@@ -2,9 +2,9 @@
 	"FileVersion": 3,
 	"Version": 1,
 	"VersionName": "1.0",
-	"FriendlyName": "MallocBinnedInsight",
+	"FriendlyName": "MallocBinnedInsights",
 	"Description": "Inspector for the MallocBinned2 memory allocator used in Unreal Engine, MB3 and MBGPU are currently unsupported",
-	"Category": "Other",
+	"Category": "Memory",
 	"CreatedBy": "Romualdo Villalobos",
 	"CreatedByURL": "rawsourcecode.io",
 	"DocsURL": "",
@@ -14,11 +14,16 @@
 	"IsBetaVersion": false,
 	"IsExperimentalVersion": true,
 	"Installed": false,
+	"SupportedPrograms": [ "UnrealInsights" ],
 	"Modules": [
 		{
-			"Name": "MallocBinnedInsight",
-			"Type": "Editor",
-			"LoadingPhase": "Default"
+			"Name": "MallocBinnedInsights",
+			"Type": "EditorAndProgram",
+			"LoadingPhase": "Default",
+			"ProgramAllowList":
+			[
+				"UnrealInsights"
+			]
 		}
 	]
 }
