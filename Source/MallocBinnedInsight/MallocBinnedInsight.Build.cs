@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class MallocBinnedInspector : ModuleRules
+public class MallocBinnedInsight : ModuleRules
 {
-	public MallocBinnedInspector(ReadOnlyTargetRules Target) : base(Target)
+	public MallocBinnedInsight(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 		

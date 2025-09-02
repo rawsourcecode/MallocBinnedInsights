@@ -4,11 +4,9 @@
 
 #include "Modules/ModuleManager.h"
 
-class FMallocBinnedInspectorModule : public IModuleInterface
+class FMallocBinnedInsightModule : public IModuleInterface
 {
 public:
-
-	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
 };
