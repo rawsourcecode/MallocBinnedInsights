@@ -13,15 +13,17 @@ public class MallocBinnedInsights : ModuleRules
 			{
 				"Core",
 			});
-
+		
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
 				"Slate",
 				"SlateCore",
 				"TraceInsights",
-				"TraceServices"
+				"TraceServices",
 			});
+
+		// PrivateDefinitions.Add("WITH_EDITOR=0");
 
 		if (Target.Type == TargetType.Editor)
 		{

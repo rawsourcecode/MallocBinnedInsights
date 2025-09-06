@@ -1,5 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 #pragma once
 
 #include "IMallocBinnedInsightsModule.h"
@@ -11,6 +9,10 @@
 
 namespace UE::Insights::MemoryProfiler::MallocBinned
 {
+#if !WITH_EDITOR
+	class FMallocBinnedInsightsComponent;
+#endif
+	
 	class FMallocBinnedInsightsModule final : public IMallocBinnedInsightsModule
 	{
 	public:
@@ -19,6 +21,7 @@ namespace UE::Insights::MemoryProfiler::MallocBinned
 
 	private:
 #if !WITH_EDITOR
+		TSharedPtr<FMallocBinnedInsightsComponent> MallocBinnedInsightsComponent;
 		FMallocBinnedInsightsTimingViewExtender MallocBinnedInsightsTimingViewExtender;
 #endif // !WITH_EDITOR
 	};

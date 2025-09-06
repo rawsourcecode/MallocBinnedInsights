@@ -1,7 +1,9 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 #include "MallocBinnedInsightsModule.h"
-#include "Insights/ITimingViewExtender.h"
+
+#include "Features/IModularFeatures.h"
+#include "Framework/Docking/TabManager.h"
+#include "MallocBinnedInsightsComponent.h"
+#include "Modules/ModuleManager.h"
 
 #define LOCTEXT_NAMESPACE "FMallocBinnedInsightsModule"
 
@@ -9,9 +11,13 @@ namespace UE::Insights::MemoryProfiler::MallocBinned
 {
 	void FMallocBinnedInsightsModule::StartupModule()
 	{
-		UE_LOG(LogTemp, Log, TEXT("Hello binned"));
 #if !WITH_EDITOR
 		IModularFeatures::Get().RegisterModularFeature(UE::Insights::Timing::TimingViewExtenderFeatureName, &MallocBinnedInsightsTimingViewExtender);
+
+		MallocBinnedInsightsComponent = FMallocBinnedInsightsComponent::CreateInstance();
+
+		IUnrealInsightsModule& UnrealInsightsModule = FModuleManager::LoadModuleChecked<IUnrealInsightsModule>("TraceInsights");
+		UnrealInsightsModule.RegisterComponent(MallocBinnedInsightsComponent);
 #endif
 	}
 

@@ -1,0 +1,80 @@
+﻿#include "MallocBinnedInsightsComponent.h"
+
+#define LOCTEXT_NAMESPACE "FMallocBinnedInsightsComponent"
+
+namespace UE::Insights::MemoryProfiler::MallocBinned
+{
+	namespace ComponentPrivate
+	{
+		static const FName TabName = "MallocBinned2 Insights";
+	}
+
+	TSharedPtr<FMallocBinnedInsightsComponent> FMallocBinnedInsightsComponent::CreateInstance()
+	{
+		// Not initializing locally to avoid thread local storage code
+		if (!Instance)
+		{
+			Instance = MakeShared<FMallocBinnedInsightsComponent>();
+		}
+
+		return Instance;
+	}
+
+	void FMallocBinnedInsightsComponent::Initialize(IUnrealInsightsModule& Module)
+	{
+	}
+
+	void FMallocBinnedInsightsComponent::Shutdown()
+	{
+	}
+
+	void FMallocBinnedInsightsComponent::RegisterMajorTabs(IUnrealInsightsModule& InsightsModule)
+	{
+		using namespace ComponentPrivate;
+
+		const FInsightsMajorTabConfig& Config = InsightsModule.FindMajorTabConfig(TabName);
+
+		if (Config.bIsAvailable)
+		{
+			// Register tab spawner for the Audio Insights.
+			FTabSpawnerEntry& TabSpawnerEntry = FGlobalTabmanager::Get()->RegisterNomadTabSpawner(TabName,
+				FOnSpawnTab::CreateRaw(this,  &FMallocBinnedInsightsComponent::SpawnTab), 
+				FCanSpawnTab::CreateRaw(this, &FMallocBinnedInsightsComponent::CanSpawnTab))
+				.SetDisplayName(Config.TabLabel.IsSet()   ? Config.TabLabel.GetValue()   : LOCTEXT("MallocBinnedInsights_TabTitle", "MallocBinned2 Insights"))
+				.SetTooltipText(Config.TabTooltip.IsSet() ? Config.TabTooltip.GetValue() : LOCTEXT("MallocBinnedInsights_TooltipText", "Open the MallocBinned2 Insights tab"));
+				// .SetIcon(Config.TabIcon.IsSet() ? Config.TabIcon.GetValue() : FSlateStyle::Get().CreateIcon("AudioInsights.Icon.Submix"));
+			
+			const TSharedRef<FWorkspaceItem>* FoundWorkspace = FGlobalTabmanager::Get()->GetLocalWorkspaceMenuRoot()->GetChildItems().FindByPredicate(
+				[](const TSharedRef<FWorkspaceItem>& WorkspaceItem)
+				{
+					return WorkspaceItem->GetDisplayName().ToString() == "Insights Tools";
+				});
+
+			if (FoundWorkspace)
+			{
+				TabSpawnerEntry.SetGroup(*FoundWorkspace);
+			}
+		}
+	}
+
+	void FMallocBinnedInsightsComponent::UnregisterMajorTabs()
+	{
+		FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(ComponentPrivate::TabName);
+	}
+
+	bool FMallocBinnedInsightsComponent::CanSpawnTab(const FSpawnTabArgs& Args) const
+	{
+		return true;
+	}
+
+	TSharedRef<SDockTab> FMallocBinnedInsightsComponent::SpawnTab(const FSpawnTabArgs& Args)
+	{
+		const TSharedRef<SDockTab> DockTab = SNew(SDockTab)
+			.Label(LOCTEXT("MallocBinnedInsights_TabTitle", "MallocBinned2 Insights"))
+			.Clipping(EWidgetClipping::ClipToBounds)
+			.TabRole(ETabRole::NomadTab);
+		return DockTab;
+	}
+}
+
+#undef LOCTEXT_NAMESPACE
