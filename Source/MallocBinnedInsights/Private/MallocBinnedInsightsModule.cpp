@@ -9,6 +9,7 @@ namespace UE::Insights::MemoryProfiler::MallocBinned
 {
 	void FMallocBinnedInsightsModule::StartupModule()
 	{
+		UE_LOG(LogTemp, Log, TEXT("Hello binned"));
 #if !WITH_EDITOR
 		IModularFeatures::Get().RegisterModularFeature(UE::Insights::Timing::TimingViewExtenderFeatureName, &MallocBinnedInsightsTimingViewExtender);
 #endif

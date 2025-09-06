@@ -19,10 +19,15 @@
 		{
 			"Name": "MallocBinnedInsights",
 			"Type": "EditorAndProgram",
-			"LoadingPhase": "Default",
+			"LoadingPhase": "EarliestPossible",
 			"ProgramAllowList":
 			[
 				"UnrealInsights"
+			],
+			"PlatformAllowList":
+			[
+				"Win64",
+				"Mac"
 			]
 		}
 	]
