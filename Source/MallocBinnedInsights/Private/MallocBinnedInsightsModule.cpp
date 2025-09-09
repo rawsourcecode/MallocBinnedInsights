@@ -15,7 +15,6 @@ namespace UE::Insights::MemoryProfiler::MallocBinned
 		IModularFeatures::Get().RegisterModularFeature(UE::Insights::Timing::TimingViewExtenderFeatureName, &MallocBinnedInsightsTimingViewExtender);
 
 		MallocBinnedInsightsComponent = FMallocBinnedInsightsComponent::CreateInstance();
-
 		IUnrealInsightsModule& UnrealInsightsModule = FModuleManager::LoadModuleChecked<IUnrealInsightsModule>("TraceInsights");
 		UnrealInsightsModule.RegisterComponent(MallocBinnedInsightsComponent);
 #endif
@@ -23,8 +22,12 @@ namespace UE::Insights::MemoryProfiler::MallocBinned
 
 	void FMallocBinnedInsightsModule::ShutdownModule()
 	{
-		// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
-		// we call this function before unloading the module.
+#if !WITH_EDITOR
+		IModularFeatures::Get().UnregisterModularFeature(UE::Insights::Timing::TimingViewExtenderFeatureName, &MallocBinnedInsightsTimingViewExtender);
+
+		IUnrealInsightsModule& UnrealInsightsModule = FModuleManager::LoadModuleChecked<IUnrealInsightsModule>("TraceInsights");
+		UnrealInsightsModule.UnregisterComponent(MallocBinnedInsightsComponent);
+#endif // !WITH_EDITOR
 	}
 }
 

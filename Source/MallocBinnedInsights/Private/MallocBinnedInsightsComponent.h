@@ -22,11 +22,15 @@ namespace UE::Insights::MemoryProfiler::MallocBinned
 		virtual void RegisterMajorTabs(IUnrealInsightsModule& InsightsModule) override;
 		virtual void UnregisterMajorTabs() override;
 
+		// End of Interface IInsightsComponent
+
 	private:
 		bool CanSpawnTab(const FSpawnTabArgs& Args) const;
 		TSharedRef<SDockTab> SpawnTab(const FSpawnTabArgs& Args);
 
 	private:
+		bool bIsInitialized = false;
+		
 		static inline TSharedPtr<FMallocBinnedInsightsComponent> Instance;
 	};
 }

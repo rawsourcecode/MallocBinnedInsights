@@ -23,7 +23,7 @@ public class MallocBinnedInsights : ModuleRules
 				"TraceServices",
 			});
 
-		// PrivateDefinitions.Add("WITH_EDITOR=0");
+		PrivateDefinitions.Add("WITH_EDITOR=0");
 
 		if (Target.Type == TargetType.Editor)
 		{
