@@ -15,13 +15,13 @@ namespace UE::Insights::MemoryProfiler::MallocBinned
 			return InsightsStyle;
 		}
 
-		static FName GetStyleName()
+		FName GetStyleName() // Not static to force call of FSlateStyle::Get which constructs this style object
 		{
 			const FLazyName StyleName = "MallocBinnedInsights";
 			return StyleName.Resolve();
 		}
 
-		static FSlateIcon CreateIcon(FName InName)
+		FSlateIcon CreateIcon(FName InName)
 		{
 			return { GetStyleName(), InName };
 		}

@@ -1,7 +1,6 @@
 #include "MallocBinnedInsightsModule.h"
 
 #include "Features/IModularFeatures.h"
-#include "Framework/Docking/TabManager.h"
 #include "MallocBinnedInsightsComponent.h"
 #include "Modules/ModuleManager.h"
 

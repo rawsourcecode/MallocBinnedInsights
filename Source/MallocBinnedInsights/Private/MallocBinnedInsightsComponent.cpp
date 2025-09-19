@@ -54,8 +54,9 @@ namespace UE::Insights::MemoryProfiler::MallocBinned
 				FCanSpawnTab::CreateRaw(this, &FMallocBinnedInsightsComponent::CanSpawnTab))
 				.SetDisplayName(Config.TabLabel.IsSet()   ? Config.TabLabel.GetValue()   : LOCTEXT("MallocBinnedInsights_TabTitle", "MallocBinned2 Insights"))
 				.SetTooltipText(Config.TabTooltip.IsSet() ? Config.TabTooltip.GetValue() : LOCTEXT("MallocBinnedInsights_TooltipText", "Open the MallocBinned2 Insights tab"))
-				.SetIcon(FSlateStyle::CreateIcon("MallocBinnedInsights.Icon"));
-			
+				.SetIcon(Config.TabTooltip.IsSet() ? Config.TabIcon.GetValue() : FSlateStyle::Get().CreateIcon("MallocBinnedInsights.Icon"));
+
+			// Find the "Insights Tools" group, in the Menu dropdown
 			const TSharedRef<FWorkspaceItem>* FoundWorkspace = FGlobalTabmanager::Get()->GetLocalWorkspaceMenuRoot()->GetChildItems().FindByPredicate(
 				[](const TSharedRef<FWorkspaceItem>& WorkspaceItem)
 				{
