@@ -48,7 +48,7 @@ namespace UE::Insights::MemoryProfiler::MallocBinned
 
 		if (Config.bIsAvailable)
 		{
-			// Register tab spawner for the Audio Insights.
+			// Register tab spawner for the malloc binned Insights.
 			FTabSpawnerEntry& TabSpawnerEntry = FGlobalTabmanager::Get()->RegisterNomadTabSpawner(TabName,
 				FOnSpawnTab::CreateRaw(this,  &FMallocBinnedInsightsComponent::SpawnTab), 
 				FCanSpawnTab::CreateRaw(this, &FMallocBinnedInsightsComponent::CanSpawnTab))
