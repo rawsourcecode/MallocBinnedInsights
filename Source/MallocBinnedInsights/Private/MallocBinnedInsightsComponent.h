@@ -25,12 +25,22 @@ namespace UE::Insights::MemoryProfiler::MallocBinned
 		// End of Interface IInsightsComponent
 
 	private:
+		bool Tick(float DeltaTime);
+
 		bool CanSpawnTab(const FSpawnTabArgs& Args) const;
 		TSharedRef<SDockTab> SpawnTab(const FSpawnTabArgs& Args);
 
 	private:
+		/** True if the object was already initialized */
 		bool bIsInitialized = false;
 		
+		/** The delegate to be invoked when this manager ticks. */
+		FTickerDelegate OnTick;
+
+		/** Handle to the registered OnTick. */
+		FTSTicker::FDelegateHandle OnTickHandle;
+
+		/** Instance to this component */
 		static inline TSharedPtr<FMallocBinnedInsightsComponent> Instance;
 	};
 }
