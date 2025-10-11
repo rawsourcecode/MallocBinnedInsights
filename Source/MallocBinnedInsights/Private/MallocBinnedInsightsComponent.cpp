@@ -1,7 +1,6 @@
 ﻿#include "MallocBinnedInsightsComponent.h"
 
 #include "MallocBinnedInsightsStyle.h"
-#include "Widgets/Docking/SDockTab.h"
 
 #define LOCTEXT_NAMESPACE "FMallocBinnedInsightsComponent"
 
